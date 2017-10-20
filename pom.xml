@@ -32,9 +32,9 @@
     <name>Apache Sling Models API</name>
     <description>Apache Sling Models API</description>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/sling/trunk/bundles/extensions/models/api</connection>
+        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-models-api.git</conncetion>
         <developerConnection> scm:svn:https://svn.apache.org/repos/asf/sling/trunk/bundles/extensions/models/api</developerConnection>
-        <url>http://svn.apache.org/viewvc/sling/trunk/bundles/extensions/models/api</url>
+        <url>https://gitbox.apache.org/repos/asf?p=sling-org-apache-sling-models-api.git.git</url>
     </scm>
     
     <properties>
