@@ -18,10 +18,10 @@
  */
 package org.apache.sling.models.spi;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-
 import aQute.bnd.annotation.ConsumerType;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Defines a strategy to choose an implementation for a model if multiple are registered 
@@ -49,6 +49,6 @@ public interface ImplementationPicker {
      * @param adaptable For reference: the adaptable. May be enquired to detect the context of the adaption. Never null.
      * @return If an implementation is chosen the class is returned, otherwise null.
      */
-    @CheckForNull Class<?> pick(@Nonnull Class<?> adapterType, @Nonnull Class<?>[] implementationsTypes, @Nonnull Object adaptable);
+    @Nullable Class<?> pick(@NotNull Class<?> adapterType, @NotNull Class<?>[] implementationsTypes, @NotNull Object adaptable);
 
 }

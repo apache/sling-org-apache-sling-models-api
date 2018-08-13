@@ -18,10 +18,9 @@
  */
 package org.apache.sling.models.factory;
 
-import javax.annotation.Nonnull;
-
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.jetbrains.annotations.NotNull;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -46,7 +45,7 @@ public interface ModelFactory {
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      */
-    public @Nonnull <ModelType> ModelType createModel(@Nonnull Object adaptable, @Nonnull Class<ModelType> type) throws MissingElementsException,
+    public @NotNull <ModelType> ModelType createModel(@NotNull Object adaptable, @NotNull Class<ModelType> type) throws MissingElementsException,
             InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
 
     /**
@@ -55,7 +54,7 @@ public interface ModelFactory {
      * @param type the class to check
      * @return {@code true} in case the given class can be created from the given adaptable, otherwise {@code false}
      */
-    public boolean canCreateFromAdaptable(@Nonnull Object adaptable, @Nonnull Class<?> type);
+    public boolean canCreateFromAdaptable(@NotNull Object adaptable, @NotNull Class<?> type);
 
     /**
      * 
@@ -67,7 +66,7 @@ public interface ModelFactory {
      * @deprecated Use {@link #isModelClass(Class)} instead!
      */
     @Deprecated
-    public boolean isModelClass(@Nonnull Object adaptable, @Nonnull Class<?> type);
+    public boolean isModelClass(@NotNull Object adaptable, @NotNull Class<?> type);
 
     /**
      * Checks if a given type can be instantiated though Sling Models. This checks that
@@ -80,7 +79,7 @@ public interface ModelFactory {
      * @return {@code true} in case the given type can be instantiated though Sling Models. 
      * 
      */
-    public boolean isModelClass(@Nonnull Class<?> type);
+    public boolean isModelClass(@NotNull Class<?> type);
 
     /**
      * Determine is a model class is available for the resource's resource type.
@@ -88,7 +87,7 @@ public interface ModelFactory {
      * @param resource a resource
      * @return {@code true} if a model class is mapped to the resource type
      */
-    public boolean isModelAvailableForResource(@Nonnull Resource resource);
+    public boolean isModelAvailableForResource(@NotNull Resource resource);
 
     /**
      * Determine is a model class is available for the request's resource's resource type.
@@ -96,7 +95,7 @@ public interface ModelFactory {
      * @param request a request
      * @return {@code true} if a model class is mapped to the resource type
      */
-    public boolean isModelAvailableForRequest(@Nonnull SlingHttpServletRequest request);
+    public boolean isModelAvailableForRequest(@NotNull SlingHttpServletRequest request);
 
     /**
      * Obtain an adapted model class based on the resource type of the provided resource.
@@ -110,7 +109,7 @@ public interface ModelFactory {
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      */
-    public Object getModelFromResource(@Nonnull Resource resource) throws MissingElementsException,
+    public Object getModelFromResource(@NotNull Resource resource) throws MissingElementsException,
             InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
 
     /**
@@ -125,7 +124,7 @@ public interface ModelFactory {
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      */
-    public Object getModelFromRequest(@Nonnull SlingHttpServletRequest request) throws MissingElementsException,
+    public Object getModelFromRequest(@NotNull SlingHttpServletRequest request) throws MissingElementsException,
             InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
 
     /**
@@ -197,5 +196,5 @@ public interface ModelFactory {
      * @param <T> the target adapter class
      * @return an instance of the target class or null if the adaptation could not be done
      */
-    public <T> T getModelFromWrappedRequest(@Nonnull SlingHttpServletRequest request, @Nonnull Resource resource, @Nonnull Class<T> targetClass);
+    public <T> T getModelFromWrappedRequest(@NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 }

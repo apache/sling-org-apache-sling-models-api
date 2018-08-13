@@ -18,11 +18,10 @@ package org.apache.sling.models.export.spi;
 
 import aQute.bnd.annotation.ConsumerType;
 import org.apache.sling.models.factory.ExportException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 import java.util.Map;
-
 /**
  * SPI interface for model exporters.
  */
@@ -35,7 +34,7 @@ public interface ModelExporter {
      * @param clazz the result class
      * @return true if the result class is supported
      */
-    boolean isSupported(@Nonnull Class<?> clazz);
+    boolean isSupported(@NotNull Class<?> clazz);
 
     /**
      * Export the provided model to the defined class using the options.
@@ -47,12 +46,12 @@ public interface ModelExporter {
      * @return an exported object
      * @throws ExportException if the export is not successful
      */
-    @CheckForNull <T> T export(@Nonnull Object model, @Nonnull Class<T> clazz, @Nonnull Map<String, String> options) throws ExportException;
+    @Nullable <T> T export(@NotNull Object model, @NotNull Class<T> clazz, @NotNull Map<String, String> options) throws ExportException;
 
     /**
      * The name of the exporter.
      * @return the name of the exporter
      */
-    @Nonnull String getName();
+    @NotNull String getName();
 
 }

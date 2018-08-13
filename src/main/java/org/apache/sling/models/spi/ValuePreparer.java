@@ -18,7 +18,7 @@ package org.apache.sling.models.spi;
 
 import aQute.bnd.annotation.ConsumerType;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Optimization interface for Injectors which wish to avoid repeated accessing of some object
@@ -34,5 +34,5 @@ public interface ValuePreparer {
      * @param adaptable the adaptable
      * @return a prepared value or ObjectUtils.NULL if a value is not preparable
      */
-    @Nonnull Object prepareValue(@Nonnull Object adaptable);
+    @NotNull Object prepareValue(@NotNull Object adaptable);
 }
