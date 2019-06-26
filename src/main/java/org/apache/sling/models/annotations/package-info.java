@@ -17,4 +17,4 @@
 @Version("1.5.0")
 package org.apache.sling.models.annotations;
 
-import aQute.bnd.annotation.Version;
+import org.osgi.annotation.versioning.Version;

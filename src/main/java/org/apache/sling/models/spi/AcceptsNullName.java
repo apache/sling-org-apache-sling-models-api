@@ -18,7 +18,7 @@
  */
 package org.apache.sling.models.spi;
 
-import aQute.bnd.annotation.ConsumerType;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Marker interface for an injector to declare that it ignores the name

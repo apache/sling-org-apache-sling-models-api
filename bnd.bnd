@@ -1,0 +1,4 @@
+Export-Package: org.apache.sling.models.*
+DynamicImport-Package: org.apache.sling.validation.api.*
+# Overwrite bundle description due to https://github.com/bndtools/bnd/issues/3282
+Bundle-Description: Apache Sling Models API

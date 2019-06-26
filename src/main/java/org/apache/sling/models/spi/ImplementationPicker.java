@@ -18,10 +18,9 @@
  */
 package org.apache.sling.models.spi;
 
-import aQute.bnd.annotation.ConsumerType;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Defines a strategy to choose an implementation for a model if multiple are registered 

@@ -19,10 +19,9 @@ package org.apache.sling.models.spi;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Type;
 
-import aQute.bnd.annotation.ConsumerType;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Service interface for pluggable value injectors.

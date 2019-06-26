@@ -18,14 +18,13 @@
  */
 package org.apache.sling.models.factory;
 
+import java.util.Map;
+
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import aQute.bnd.annotation.ProviderType;
-
-import java.util.Map;
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * The ModelFactory instantiates Sling Model classes similar to #adaptTo but will throw an exception in case

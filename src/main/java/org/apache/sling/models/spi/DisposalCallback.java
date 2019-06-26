@@ -16,7 +16,7 @@
  */
 package org.apache.sling.models.spi;
 
-import aQute.bnd.annotation.ConsumerType;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Callback interface which can be implemented by Injectors to perform some action

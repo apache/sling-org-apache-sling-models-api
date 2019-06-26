@@ -16,7 +16,7 @@
  */
 package org.apache.sling.models.factory;
 
-import aQute.bnd.annotation.ProviderType;
+import org.osgi.annotation.versioning.ProviderType;
 
 @ProviderType
 @SuppressWarnings("serial")

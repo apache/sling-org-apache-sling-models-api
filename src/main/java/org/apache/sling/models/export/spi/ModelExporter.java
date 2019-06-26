@@ -16,12 +16,12 @@
  */
 package org.apache.sling.models.export.spi;
 
-import aQute.bnd.annotation.ConsumerType;
+import java.util.Map;
+
 import org.apache.sling.models.factory.ExportException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Map;
+import org.osgi.annotation.versioning.ConsumerType;
 /**
  * SPI interface for model exporters.
  */
