@@ -14,7 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Version("1.6.0")
 package org.apache.sling.models.annotations;
 
-import aQute.bnd.annotation.Version;
+import javax.inject.Qualifier;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * Marks a given Property as Path to be shortened by a Externalized Path Provider.
+ *
+ * By default the Resource Resolver's map function is used but one can install custom Externalized Path Providers.
+ * The registration of the providers is passive and dynamic meaning that the default provider is used until
+ * other provider services are bound and then the one with the highest priority is selected
+ */
+@Target({ ElementType.FIELD, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Qualifier
+public @interface ExternalizePath {
+}
