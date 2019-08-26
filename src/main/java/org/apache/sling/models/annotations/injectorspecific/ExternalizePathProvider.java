@@ -18,14 +18,12 @@ package org.apache.sling.models.annotations.injectorspecific;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface ExternalizedPathProvider {
-
-    int FALLBACK_PRIORITY = -1;
-
-    /** @return The priority used to select a provider when multiple are available. The one with the highest priority is selected
-     *          In order for a custom Provider to be selected the priroty must be higher than the Fallback Priority
-     **/
-    int getPriority();
+/**
+ * Interface for a Provider of an Externalized Path. The
+ * Externalize Path Injector is selecting the Provider with
+ * the highest Service Ranking so adjust the ranking as needed.
+ */
+public interface ExternalizePathProvider {
 
     /**
      * Externalizes a given Path
