@@ -33,4 +33,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface ExternalizePath {
+    /**
+     * @return Name of the field providing the resource
+     */
+    public String resourceField() default "";
+    /**
+     * @return Name of the method providing the resource
+     */
+    public String resourceMethod() default "";
 }
