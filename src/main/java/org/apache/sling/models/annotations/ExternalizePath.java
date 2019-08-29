@@ -34,11 +34,14 @@ import java.lang.annotation.Target;
 @Qualifier
 public @interface ExternalizePath {
     /**
-     * @return Name of the field providing the resource
-     */
-    public String resourceField() default "";
-    /**
-     * @return Name of the method providing the resource
+     * @return Name of the method providing the resource. If not provided or this method or the resource field
+     * does not provide a resource the 'getResource' is sued as fallback
      */
     public String resourceMethod() default "";
+
+    /**
+     * @return Name of the field providing the resource. If not provided or this field or the default method
+     * (getResoruce()) is not a providing a resource then 'resource' is used as fallback
+     */
+    public String resourceField() default "";
 }
