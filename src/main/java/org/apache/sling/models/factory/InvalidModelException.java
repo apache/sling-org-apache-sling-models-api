@@ -16,7 +16,7 @@
  */
 package org.apache.sling.models.factory;
 
-import aQute.bnd.annotation.ProviderType;
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Thrown in case the given model type could not be validated through the model validation.

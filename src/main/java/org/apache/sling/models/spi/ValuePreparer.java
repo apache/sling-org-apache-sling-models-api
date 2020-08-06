@@ -16,9 +16,8 @@
  */
 package org.apache.sling.models.spi;
 
-import aQute.bnd.annotation.ConsumerType;
-
 import org.jetbrains.annotations.NotNull;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Optimization interface for Injectors which wish to avoid repeated accessing of some object

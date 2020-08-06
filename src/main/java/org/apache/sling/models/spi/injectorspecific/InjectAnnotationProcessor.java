@@ -16,7 +16,7 @@
  */
 package org.apache.sling.models.spi.injectorspecific;
 
-import aQute.bnd.annotation.ConsumerType;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Processor for injector-specific annotations.

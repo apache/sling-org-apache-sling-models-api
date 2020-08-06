@@ -20,7 +20,7 @@ package org.apache.sling.models.factory;
 
 import java.lang.reflect.AnnotatedElement;
 
-import aQute.bnd.annotation.ProviderType;
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Exception which is used whenever one element (field, method or constructor) could not be set.

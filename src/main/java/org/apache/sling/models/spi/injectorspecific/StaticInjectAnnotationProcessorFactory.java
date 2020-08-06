@@ -18,7 +18,7 @@ package org.apache.sling.models.spi.injectorspecific;
 
 import java.lang.reflect.AnnotatedElement;
 
-import aQute.bnd.annotation.ConsumerType;
+import org.osgi.annotation.versioning.ConsumerType;
 
 /**
  * Factory for {@link InjectAnnotationProcessor} that is evaluated once

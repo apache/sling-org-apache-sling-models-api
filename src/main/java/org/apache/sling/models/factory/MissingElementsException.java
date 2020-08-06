@@ -21,7 +21,7 @@ package org.apache.sling.models.factory;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import aQute.bnd.annotation.ProviderType;
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Exception which is triggered whenever a Sling Model cannot be instantiated

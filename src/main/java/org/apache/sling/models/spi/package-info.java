@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Version("1.2.1")
+@Version("1.2.2")
 package org.apache.sling.models.spi;
 
-import aQute.bnd.annotation.Version;
+import org.osgi.annotation.versioning.Version;
