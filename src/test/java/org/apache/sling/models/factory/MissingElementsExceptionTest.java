@@ -18,11 +18,12 @@
  */
 package org.apache.sling.models.factory;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class MissingElementsExceptionTest {
@@ -41,13 +42,14 @@ public class MissingElementsExceptionTest {
         }
 
         // now evaluate exception message
-        Assert.assertThat(wrapperException.getMessage(), Matchers.not(Matchers.containsString("Root Exception")));
-        Assert.assertThat(wrapperException.getMessage(), Matchers.containsString("Test wrapper"));
+        assertThat(wrapperException.getMessage(), Matchers.not(Matchers.containsString("Root Exception")));
+        assertThat(wrapperException.getMessage(), Matchers.containsString("Test wrapper"));
 
         // make sure the aggregated exceptions appear in the stack trace
         StringWriter stringWriter = new StringWriter();
         wrapperException.printStackTrace(new PrintWriter(stringWriter));
-        Assert.assertThat(stringWriter.toString(), Matchers.containsString("Root exception"));
-        Assert.assertThat(stringWriter.toString(), Matchers.containsString("Test wrapper"));
+        assertThat(stringWriter.toString(), Matchers.containsString("Root exception"));
+        assertThat(stringWriter.toString(), Matchers.containsString("Test wrapper"));
     }
+
 }
