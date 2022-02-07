@@ -14,7 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Version("1.1.0")
 package org.apache.sling.models.annotations.via;
 
-import org.osgi.annotation.versioning.Version;
+import org.apache.sling.models.annotations.ViaProviderType;
+import org.osgi.annotation.versioning.ProviderType;
+
+/**
+ * Marker class for using the OriginalResource @Via provider.
+ */
+@ProviderType
+public class OriginalResource implements ViaProviderType {
+}
