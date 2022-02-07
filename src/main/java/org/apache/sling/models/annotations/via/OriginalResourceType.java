@@ -20,8 +20,8 @@ import org.apache.sling.models.annotations.ViaProviderType;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
- * Marker class for using the OriginalResource @Via provider.
+ * Marker class for using the OriginalResourceType @Via provider.
  */
 @ProviderType
-public class OriginalResource implements ViaProviderType {
+public class OriginalResourceType implements ViaProviderType {
 }
