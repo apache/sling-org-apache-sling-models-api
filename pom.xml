@@ -41,6 +41,18 @@
         <sling.java.version>8</sling.java.version>
         <project.build.outputTimestamp>2022-04-27T07:14:48Z</project.build.outputTimestamp>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!-- Disable annotation processing, otherwise Maven will try to use the ValidatingAnnotationProcessor,
+                    which is not available during compilation time -->
+                <configuration>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
