@@ -53,13 +53,13 @@ public class ValidatingAnnotationProcessor extends AbstractProcessor {
                 if (isStaticOrFinalField(annotatedElement)) {
                     processingEnv.getMessager().printMessage(
                         Kind.ERROR,
-                        "Annotation " + annotation + " may not be used on static or final fields",
+                        "Annotation " + annotation + " may not be used on static or final fields: " + getSymbolName(annotatedElement),
                         annotatedElement
                     );
                 } else if (isStaticMethod(annotatedElement)) {
                     processingEnv.getMessager().printMessage(
                         Kind.ERROR,
-                        "Annotation " + annotation + " may not be used on static methods",
+                        "Annotation " + annotation + " may not be used on static methods: "  + getSymbolName(annotatedElement),
                         annotatedElement
                     );
                 }
@@ -67,6 +67,14 @@ public class ValidatingAnnotationProcessor extends AbstractProcessor {
         }
 
         return true;
+    }
+
+    private String getSymbolName(Element annotatedElement) {
+        String name = annotatedElement.getEnclosingElement().getSimpleName().toString() + "#" + annotatedElement.getSimpleName().toString();
+        if (annotatedElement.getKind() == ElementKind.METHOD) {
+            name += "()";
+        }
+        return name;
     }
 
     private boolean isStaticOrFinalField(Element annotatedElement) {
