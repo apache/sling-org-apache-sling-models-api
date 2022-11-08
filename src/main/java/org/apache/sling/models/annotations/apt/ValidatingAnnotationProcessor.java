@@ -45,18 +45,18 @@ public class ValidatingAnnotationProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (TypeElement annotation : annotations) {
             for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(annotation)) {
-                if (!annotatedElement.getModifiers().contains(Modifier.STATIC) || !isSlingModel(annotatedElement)) {
-                    // skip if not static, or the enclosing class/interface is not a sling model
+                if (!isSlingModel(annotatedElement)) {
+                    // skip any class that is not a Sling Model
                     continue;
                 }
 
-                if (annotatedElement.getKind() == ElementKind.FIELD) {
+                if (isStaticOrFinalField(annotatedElement)) {
                     processingEnv.getMessager().printMessage(
                         Kind.ERROR,
-                        "Annotation " + annotation + " may not be used on static fields",
+                        "Annotation " + annotation + " may not be used on static or final fields",
                         annotatedElement
                     );
-                } else if (annotatedElement.getKind() == ElementKind.METHOD) {
+                } else if (isStaticMethod(annotatedElement)) {
                     processingEnv.getMessager().printMessage(
                         Kind.ERROR,
                         "Annotation " + annotation + " may not be used on static methods",
@@ -67,6 +67,15 @@ public class ValidatingAnnotationProcessor extends AbstractProcessor {
         }
 
         return true;
+    }
+
+    private boolean isStaticOrFinalField(Element annotatedElement) {
+        return (annotatedElement.getModifiers().contains(Modifier.STATIC) || annotatedElement.getModifiers().contains(Modifier.FINAL))
+            && annotatedElement.getKind() == ElementKind.FIELD;
+    }
+
+    private boolean isStaticMethod(Element annotatedElement) {
+        return annotatedElement.getModifiers().contains(Modifier.STATIC) && annotatedElement.getKind() == ElementKind.METHOD;
     }
 
     private boolean isSlingModel(Element annotatedElement) {

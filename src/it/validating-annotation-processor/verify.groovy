@@ -26,29 +26,29 @@ def errors = lines.findAll({ it.contains('[ERROR]') })
 def expectErrors = { classes, expectedMessages ->
     classes.forEach({ cls ->
         def messages = expectedMessages.clone()
-        messages.removeAll({ message -> errors.findAll({ it.contains(cls) && it.contains(message) }) })
+        messages.removeAll({ message -> errors.findAll({ it.contains("/${cls}.java") && it.contains(message) }) })
         assert messages.empty: "did not find the following errors for class '$cls': $messages"
     })
 }
 
 def expectNoErrors = { classes ->
     classes.forEach({ cls ->
-        assert !errors.findAll({ it.contains(cls) }): "found the errors for class '$cls'"
+        assert !errors.findAll({ it.contains("/${cls}.java") }): "found errors for class '$cls'"
     })
 }
 
 expectErrors(
         ['StaticFieldInjectionModel', 'IStaticFieldInjectionModel'],
         [
-                'Annotation javax.inject.Inject may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.ChildResource may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.OSGiService may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.RequestAttribute may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.ResourcePath may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.ScriptVariable may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.Self may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.SlingObject may not be used on static fields',
-                'Annotation org.apache.sling.models.annotations.injectorspecific.ValueMapValue may not be used on static fields',
+                'Annotation javax.inject.Inject may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.ChildResource may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.OSGiService may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.RequestAttribute may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.ResourcePath may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.ScriptVariable may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.Self may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.SlingObject may not be used on static or final fields',
+                'Annotation org.apache.sling.models.annotations.injectorspecific.ValueMapValue may not be used on static or final fields',
         ]
 )
 
@@ -65,6 +65,11 @@ expectErrors(
                 'Annotation org.apache.sling.models.annotations.injectorspecific.SlingObject may not be used on static methods',
                 'Annotation org.apache.sling.models.annotations.injectorspecific.ValueMapValue may not be used on static methods',
         ]
+)
+
+expectErrors(
+        ['FinalMemberInjectionModel'],
+        ['Annotation javax.inject.Inject may not be used on static or final fields']
 )
 
 expectNoErrors(['MemberInjectionModel', 'NoModel'])
