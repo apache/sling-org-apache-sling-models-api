@@ -22,9 +22,11 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.*;
 
 @Model(adaptables = { Resource.class })
-public class MemberInjectionModel {
+public class MethodInjectionModel {
 
     @Inject
-    private Resource inject;
+    final void method(Resource resource) {
+
+    }
 
 }

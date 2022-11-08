@@ -68,8 +68,8 @@ expectErrors(
 )
 
 expectErrors(
-        ['FinalMemberInjectionModel'],
+        ['FinalFieldInjectionModel'],
         ['Annotation javax.inject.Inject may not be used on static or final fields']
 )
 
-expectNoErrors(['MemberInjectionModel', 'NoModel'])
+expectNoErrors(['FieldInjectionModel', 'MethodInjectionModel', 'NoModel', 'IMethodInjectionModel'])

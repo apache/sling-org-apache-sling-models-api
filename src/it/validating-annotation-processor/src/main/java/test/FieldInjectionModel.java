@@ -22,9 +22,9 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.*;
 
 @Model(adaptables = { Resource.class })
-public class FinalMemberInjectionModel {
+public class FieldInjectionModel {
 
     @Inject
-    private final Resource inject = null;
+    private Resource inject;
 
 }

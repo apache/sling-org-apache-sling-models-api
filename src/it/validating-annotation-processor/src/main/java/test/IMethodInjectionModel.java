@@ -22,7 +22,7 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.*;
 
 @Model(adaptables = { Resource.class })
-public interface IMemberInjectionModel {
+public interface IMethodInjectionModel {
 
     @Inject
     void inject(Resource resource);
