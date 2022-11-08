@@ -29,20 +29,51 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
 
+import org.apache.sling.models.annotations.Model;
+
 /**
  * Annotation processor that implements compile-time validation for Sling Models
  */
-@SupportedAnnotationTypes(
-        "org.apache.sling.models.annotations.injectorspecific.SlingObject")
-      @SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedAnnotationTypes({
+    "javax.inject.Inject",
+    "org.apache.sling.models.annotations.injectorspecific.*",
+})
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ValidatingAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (TypeElement annotation : annotations) {
-            for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(annotation) ) {
-                if ( annotatedElement.getKind() == ElementKind.FIELD && annotatedElement.getModifiers().contains(Modifier.STATIC) ) {
-                    processingEnv.getMessager().printMessage(Kind.ERROR, "Annotation " + annotation + " may not be used on static fields", annotatedElement);
+            for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(annotation)) {
+                if (!annotatedElement.getModifiers().contains(Modifier.STATIC)) {
+                    // skip if not static
+                    continue;
+                }
+
+                Element enclosingElement = annotatedElement.getEnclosingElement();
+
+                if (enclosingElement.getKind() != ElementKind.CLASS && enclosingElement.getKind() != ElementKind.INTERFACE) {
+                    // skip any occurrence where the enclosing element is not a class or interface, should not happen
+                    continue;
+                }
+
+                if (enclosingElement.getAnnotation(Model.class) == null) {
+                    // skip classes and interfaces that are not annotated as model
+                    continue;
+                }
+
+                if (annotatedElement.getKind() == ElementKind.FIELD) {
+                    processingEnv.getMessager().printMessage(
+                        Kind.ERROR,
+                        "Annotation " + annotation + " may not be used on static fields",
+                        annotatedElement
+                    );
+                } else if (annotatedElement.getKind() == ElementKind.METHOD) {
+                    processingEnv.getMessager().printMessage(
+                        Kind.ERROR,
+                        "Annotation " + annotation + " may not be used on static methods",
+                        annotatedElement
+                    );
                 }
             }
         }

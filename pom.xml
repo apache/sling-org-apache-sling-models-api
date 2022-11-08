@@ -58,9 +58,6 @@
                     <settingsFile>src/it/settings.xml</settingsFile>
                     <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
                     <postBuildHookScript>verify</postBuildHookScript>
-                    <extraArtifacts>
-                        <extraArtifact>org.jacoco:org.jacoco.agent:0.8.7:jar:runtime</extraArtifact>
-                    </extraArtifacts>
                 </configuration>
                 <executions>
                     <execution>
@@ -119,6 +116,14 @@
             <id>jacoco-report</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <artifactId>maven-invoker-plugin</artifactId>
+                        <configuration>
+                            <extraArtifacts>
+                                <extraArtifact>org.jacoco:org.jacoco.agent:0.8.7:jar:runtime</extraArtifact>
+                            </extraArtifacts>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>

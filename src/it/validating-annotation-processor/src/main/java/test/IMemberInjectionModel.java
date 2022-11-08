@@ -16,14 +16,15 @@
  */
 package test;
 
-import org.apache.sling.api.resource.Resource;
+import javax.inject.Inject;
+import org.apache.sling.api.resource.*;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.SlingObject;
+import org.apache.sling.models.annotations.injectorspecific.*;
 
 @Model(adaptables = { Resource.class })
-public class StaticFieldInjection {
+public interface IMemberInjectionModel {
 
-    @SlingObject
-    private static Resource slingObject;
+    @Inject
+    void inject(Resource resource);
 
 }
