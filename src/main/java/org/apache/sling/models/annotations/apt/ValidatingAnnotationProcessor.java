@@ -45,20 +45,8 @@ public class ValidatingAnnotationProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (TypeElement annotation : annotations) {
             for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(annotation)) {
-                if (!annotatedElement.getModifiers().contains(Modifier.STATIC)) {
-                    // skip if not static
-                    continue;
-                }
-
-                Element enclosingElement = annotatedElement.getEnclosingElement();
-
-                if (enclosingElement.getKind() != ElementKind.CLASS && enclosingElement.getKind() != ElementKind.INTERFACE) {
-                    // skip any occurrence where the enclosing element is not a class or interface, should not happen
-                    continue;
-                }
-
-                if (enclosingElement.getAnnotation(Model.class) == null) {
-                    // skip classes and interfaces that are not annotated as model
+                if (!annotatedElement.getModifiers().contains(Modifier.STATIC) || !isSlingModel(annotatedElement)) {
+                    // skip if not static, or the enclosing class/interface is not a sling model
                     continue;
                 }
 
@@ -81,4 +69,11 @@ public class ValidatingAnnotationProcessor extends AbstractProcessor {
         return true;
     }
 
+    private boolean isSlingModel(Element annotatedElement) {
+        Element enclosingElement = annotatedElement.getEnclosingElement();
+
+        // skip any occurrence where the enclosing element is not a class or interface, should not happen
+        return (enclosingElement.getKind() == ElementKind.CLASS || enclosingElement.getKind() == ElementKind.INTERFACE)
+            && enclosingElement.getAnnotation(Model.class) != null;
+    }
 }
