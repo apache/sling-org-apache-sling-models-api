@@ -49,6 +49,25 @@ public interface ModelFactory {
             InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
 
     /**
+     * Create a wrapped request object with the specified resource and instantiates the given Sling Model class from that wrapped request. The wrapped request
+     * object will have a fresh set of script bindings so that any injected bindings references have the correct context.
+     *
+     * @param request the current request
+     * @param resource the resource to set as the wrapped request's resource
+     * @param targetClass the class to instantiate
+     * @return a new instance for the required model (never {@code null})
+     * @throws MissingElementsException in case no injector was able to inject some required values with the given types
+     * @throws InvalidAdaptableException in case the given class cannot be instantiated from the given adaptable (different adaptable on the model annotation)
+     * @throws ModelClassException in case the model could not be instantiated because model annotation was missing, reflection failed, no valid constructor was found, model was not registered as adapter factory yet, or post-construct could not be called
+     * @throws PostConstructException in case the post-construct method has thrown an exception itself
+     * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
+     * @throws InvalidModelException in case the given model type could not be validated through the model validation
+     * @since 1.5.0 (Models API Bundle 1.4.4)
+     * @see #getModelFromWrappedRequest(SlingHttpServletRequest, Resource, Class)
+     */
+    public @NotNull <T> T createModelFromWrappedRequest(@NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
+
+    /**
      * 
      * @param adaptable the adaptable to check
      * @param type the class to check
@@ -192,12 +211,14 @@ public interface ModelFactory {
     /**
      * Create a wrapped request object with the specified resource and (try to) adapt the request object into the specified class. The wrapped request
      * object will have a fresh set of script bindings so that any injected bindings references have the correct context.
+     * Consider using {@link #createModelFromWrappedRequest(SlingHttpServletRequest, Resource, Class)} instead to get exceptions propagated which may occur when trying to create the model.
      *
      * @param request the current request
      * @param resource the resource to set as the wrapped request's resource
      * @param targetClass the target adapter class
      * @param <T> the target adapter class
      * @return an instance of the target class or null if the adaptation could not be done
+     * @since 1.4.0 (Models API Bundle 1.3.6)
      */
     public @Nullable <T> T getModelFromWrappedRequest(@NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 
