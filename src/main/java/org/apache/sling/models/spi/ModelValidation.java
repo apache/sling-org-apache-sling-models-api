@@ -28,7 +28,8 @@ public interface ModelValidation {
      * @param adaptable the adaptable about to be used instantiate the Sling Model Class
      * @param modelClass the class of the model which is about to be instantiated
      * @param required if {@code true} validation fails even if validation model can't be found.
-     * @return {@code null} if validation was successful, otherwise either {@link ValidationException} 
+     * @param <ModelType> Model type
+     * @return {@code null} if validation was successful, otherwise either {@link ValidationException}
      * in case validation could not be performed for some reason (e.g. no validation information available)
      * or {@link InvalidModelException} in case the given model type could not be validated through the {@link ModelValidation}.
      */

@@ -40,6 +40,7 @@ public @interface ScriptVariable {
     /**
      * Specifies the name of the script variable.
      * If empty or not set, then the name is derived from the method or field.
+     * @return Name
      */
     public String name() default "";
 
@@ -47,6 +48,7 @@ public @interface ScriptVariable {
      * If set to true, the model can be instantiated even if there is no
      * scripting value with the specified name.
      * Default = false.
+     * @return Optional
      * @deprecated Use {@link #injectionStrategy} instead.
      */
     @Deprecated
@@ -62,6 +64,7 @@ public @interface ScriptVariable {
      * </ul>
      * WARNING: Injection strategy is ignored if either {@link org.apache.sling.models.annotations.Optional}
      * or {@link org.apache.sling.models.annotations.Required} is applied on the same element.
+     * @return Injection strategy
      */
     public InjectionStrategy injectionStrategy() default InjectionStrategy.DEFAULT;
 }

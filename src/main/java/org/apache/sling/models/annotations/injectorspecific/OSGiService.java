@@ -37,7 +37,8 @@ import org.apache.sling.models.spi.injectorspecific.InjectAnnotation;
 @Source("osgi-services")
 public @interface OSGiService {
     /**
-     * specifies the RFC 1960-based filter string, which is evaluated when retrieving the service. If empty string or left out, then no filtering is being performed.
+     * Specifies the RFC 1960-based filter string, which is evaluated when retrieving the service. If empty string or left out, then no filtering is being performed.
+     * @return Filter string
      *
      * @see "Core Specification, section 5.5, for a description of the filter string"
      * @see <a href="http://www.ietf.org/rfc/rfc1960.txt">RFC 1960</a>
@@ -47,6 +48,7 @@ public @interface OSGiService {
     /**
      * If set to true, the model can be instantiated even if there is no OSGi service implementation available. Default
      * = false.
+     * @return Optional
      * @deprecated Use {@link #injectionStrategy} instead.
      */
     @Deprecated
@@ -62,6 +64,7 @@ public @interface OSGiService {
      * </ul>
      * WARNING: Injection strategy is ignored if either {@link org.apache.sling.models.annotations.Optional}
      * or {@link org.apache.sling.models.annotations.Required} is applied on the same element.
+     * @return Injection strategy
      */
     public InjectionStrategy injectionStrategy() default InjectionStrategy.DEFAULT;
 }

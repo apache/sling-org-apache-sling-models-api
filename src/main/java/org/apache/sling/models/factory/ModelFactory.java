@@ -37,6 +37,7 @@ public interface ModelFactory {
      * Instantiates the given Sling Model class from the given adaptable.
      * @param adaptable the adaptable to use to instantiate the Sling Model Class
      * @param type the class to instantiate
+     * @param <ModelType> Model type
      * @return a new instance for the required model (never {@code null})
      * @throws MissingElementsException in case no injector was able to inject some required values with the given types
      * @throws InvalidAdaptableException in case the given class cannot be instantiated from the given adaptable (different adaptable on the model annotation)
@@ -55,6 +56,7 @@ public interface ModelFactory {
      * @param request the current request
      * @param resource the resource to set as the wrapped request's resource
      * @param targetClass the class to instantiate
+     * @param <T> Model type
      * @return a new instance for the required model (never {@code null})
      * @throws MissingElementsException in case no injector was able to inject some required values with the given types
      * @throws InvalidAdaptableException in case the given class cannot be instantiated from the given adaptable (different adaptable on the model annotation)
@@ -68,7 +70,7 @@ public interface ModelFactory {
     public @NotNull <T> T createModelFromWrappedRequest(@NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 
     /**
-     * 
+     *
      * @param adaptable the adaptable to check
      * @param type the class to check
      * @return {@code true} in case the given class can be created from the given adaptable, otherwise {@code false}
@@ -76,11 +78,11 @@ public interface ModelFactory {
     public boolean canCreateFromAdaptable(@NotNull Object adaptable, @NotNull Class<?> type);
 
     /**
-     * 
+     *
      * @param adaptable the adaptable to check
      * @param type the class to check
      * @return false in case no class with the Model annotation adapts to the requested type
-     * 
+     *
      * @see org.apache.sling.models.annotations.Model
      * @deprecated Use {@link #isModelClass(Class)} instead!
      */
@@ -95,8 +97,8 @@ public interface ModelFactory {
      * </ul>
      * Only if both conditions are fulfilled this method will return {@code true}.
      * @param type the class to check
-     * @return {@code true} in case the given type can be instantiated though Sling Models. 
-     * 
+     * @return {@code true} in case the given type can be instantiated though Sling Models.
+     *
      */
     public boolean isModelClass(@NotNull Class<?> type);
 
@@ -202,7 +204,7 @@ public interface ModelFactory {
      * @throws ExportException if the export fails
      * @throws MissingExporterException if the named exporter can't be found
      */
-    public @NotNull <T> T exportModelForRequest(@NotNull SlingHttpServletRequest request, @NotNull String exporterName, 
+    public @NotNull <T> T exportModelForRequest(@NotNull SlingHttpServletRequest request, @NotNull String exporterName,
             @NotNull Class<T> targetClass, @NotNull Map<String, String> options) throws MissingElementsException,
             InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException,
             ExportException, MissingExporterException;

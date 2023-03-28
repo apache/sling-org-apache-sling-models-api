@@ -30,21 +30,25 @@ public @interface Exporter {
 
     /**
      * Exporter name.
+     * @return Name
      */
     String name();
 
     /**
      * The selector name under which the exporter servlet will be registered.
+     * @return Selector
      */
     String selector() default "model";
 
     /**
      * Extensions under which the exporter servlet will be registered.
+     * @return Extensions
      */
     String[] extensions();
 
     /**
      * Optional list of exporter options.
+     * @return Options
      */
     ExporterOption[] options() default {};
 

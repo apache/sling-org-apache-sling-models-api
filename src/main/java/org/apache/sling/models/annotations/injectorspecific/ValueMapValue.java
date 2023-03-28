@@ -40,6 +40,7 @@ public @interface ValueMapValue {
     /**
      * Specifies the name of the value from the value map to take.
      * If empty, then the name is derived from the method or field.
+     * @return Name
      */
     String name() default "";
 
@@ -47,6 +48,7 @@ public @interface ValueMapValue {
      * If set to true, the model can be instantiated even if that value is missing.
      * Only considered if default is not set, because any default value implicitly
      * sets optional to true
+     * @return Optional
      * @deprecated Use {@link #injectionStrategy} instead
      */
     @Deprecated
@@ -62,12 +64,14 @@ public @interface ValueMapValue {
      * </ul>
      * WARNING: Injection strategy is ignored if either {@link org.apache.sling.models.annotations.Optional}
      * or {@link org.apache.sling.models.annotations.Required} is applied on the same element.
+     * @return Injection strategy
      */
     InjectionStrategy injectionStrategy() default InjectionStrategy.DEFAULT;
 
     /**
      * If set, then the child resource can be obtained via a projection of the given
      * property of the adaptable.
+     * @return Via name
      */
     String via() default "";
 }

@@ -16,12 +16,12 @@
  */
 package org.apache.sling.models.annotations;
 
-import org.apache.sling.models.annotations.via.BeanProperty;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import org.apache.sling.models.annotations.via.BeanProperty;
 
 /**
  * Indicate that this injection point should be handled using some value
@@ -33,11 +33,13 @@ public @interface Via {
 
     /**
      * A string value which the via provider uses to determine the correct adaptable.
+     * @return Via name
      */
     public String value() default "";
 
     /**
      * The specific ViaProvider which will handle retrieval of the adaptable.
+     * @return Provider class
      */
     public Class<? extends ViaProviderType> type() default BeanProperty.class;
 

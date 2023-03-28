@@ -30,6 +30,7 @@ public @interface Exporters {
 
     /**
      * List of exporters.
+     * @return Exporters
      */
     Exporter[] value();
 }

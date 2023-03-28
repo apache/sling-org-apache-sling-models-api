@@ -23,11 +23,13 @@ public @interface ExporterOption {
 
     /**
      * Name of the exporter option.
+     * @return Option name
      */
     String name();
 
     /**
      * Value of the exporter option.
+     * @return Option value
      */
     String value();
 }

@@ -40,6 +40,7 @@ public @interface Self {
     /**
      * If set to true, the model can be instantiated even if there is no object that can be adapted from the adaptable itself.
      * Default = false.
+     * @return Optional
      * @deprecated Use {@link #injectionStrategy} instead
      */
     @Deprecated
@@ -55,6 +56,7 @@ public @interface Self {
      * </ul>
      * WARNING: Injection strategy is ignored if either {@link org.apache.sling.models.annotations.Optional}
      * or {@link org.apache.sling.models.annotations.Required} is applied on the same element.
+     * @return Injection strategy
      */
     public InjectionStrategy injectionStrategy() default InjectionStrategy.DEFAULT;
 

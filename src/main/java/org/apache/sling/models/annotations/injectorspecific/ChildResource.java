@@ -40,6 +40,7 @@ public @interface ChildResource {
     /**
      * Specifies the name of the child resource.
      * If empty or not set, then the name is derived from the method or field.
+     * @return Name
      */
     public String name() default "";
 
@@ -47,6 +48,7 @@ public @interface ChildResource {
      * If set to true, the model can be instantiated even if there is no child resource
      * with that name available.
      * Default = false.
+     * @return Optional
      * @deprecated Use {@link #injectionStrategy} instead.
      */
     @Deprecated
@@ -62,12 +64,14 @@ public @interface ChildResource {
      * </ul>
      * WARNING: Injection strategy is ignored if either {@link org.apache.sling.models.annotations.Optional}
      * or {@link org.apache.sling.models.annotations.Required} is applied on the same element.
+     * @return Injection strategy
      */
     public InjectionStrategy injectionStrategy() default InjectionStrategy.DEFAULT;
 
     /**
      * If set, then the child resource can be obtained via a projection of the given
      * property of the adaptable.
+     * @return Via name
      */
     public String via() default "";
 
