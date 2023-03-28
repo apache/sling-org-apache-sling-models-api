@@ -38,7 +38,7 @@ import org.apache.sling.models.spi.injectorspecific.InjectAnnotation;
 public @interface OSGiService {
     /**
      * specifies the RFC 1960-based filter string, which is evaluated when retrieving the service. If empty string or left out, then no filtering is being performed.
-     * 
+     *
      * @see "Core Specification, section 5.5, for a description of the filter string"
      * @see <a href="http://www.ietf.org/rfc/rfc1960.txt">RFC 1960</a>
      */
@@ -53,10 +53,15 @@ public @interface OSGiService {
     public boolean optional() default false;
 
     /**
-     * if set to REQUIRED injection is mandatory, if set to OPTIONAL injection is optional, in case of DEFAULT 
-     * the standard annotations ({@link org.apache.sling.models.annotations.Optional}, {@link org.apache.sling.models.annotations.Required}) are used.
-     * If even those are not available the default injection strategy defined on the {@link org.apache.sling.models.annotations.Model} applies.
-     * Default value = DEFAULT.
+     * Specifies the injection strategy applied to an annotated element:
+     * <ul>
+     * <li>If set to {@link InjectionStrategy#REQUIRED}, injection is mandatory.</li>
+     * <li>If set to {@link InjectionStrategy#OPTIONAL}, injection is optional.</li>
+     * <li>If set to {@link InjectionStrategy#DEFAULT} (default), the default injection strategy defined on the
+     * {@link org.apache.sling.models.annotations.Model} applies.</li>
+     * </ul>
+     * WARNING: Injection strategy is ignored if either {@link org.apache.sling.models.annotations.Optional}
+     * or {@link org.apache.sling.models.annotations.Required} is applied on the same element.
      */
     public InjectionStrategy injectionStrategy() default InjectionStrategy.DEFAULT;
 }
