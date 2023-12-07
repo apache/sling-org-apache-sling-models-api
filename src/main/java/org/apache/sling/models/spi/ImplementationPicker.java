@@ -23,23 +23,23 @@ import org.jetbrains.annotations.Nullable;
 import org.osgi.annotation.versioning.ConsumerType;
 
 /**
- * Defines a strategy to choose an implementation for a model if multiple are registered 
+ * Defines a strategy to choose an implementation for a model if multiple are registered
  * for the same interface or super class.
  * <p>
- * With using the @Model.adapters attribute it is possible to define interfaces or super 
- * classes to which the model implementation is an adaption target. It is possible that 
+ * With using the @Model.adapters attribute it is possible to define interfaces or super
+ * classes to which the model implementation is an adaption target. It is possible that
  * multiple models implement the same type.
  * </p>
  * <p>
- * In this case services implementing the {@link ImplementationPicker} interface are 
- * queried to decide which implementation should be chosen. If multiple implementations 
- * of this interface exists they are queried one after another by service ranking. 
+ * In this case services implementing the {@link ImplementationPicker} interface are
+ * queried to decide which implementation should be chosen. If multiple implementations
+ * of this interface exists they are queried one after another by service ranking.
  * The first that picks an implementation is the winner.
  * </p>
  */
 @ConsumerType
 public interface ImplementationPicker {
-    
+
     /**
      * Select an implementation for the adapter class to which the adaptable should be adapted to.
      * @param adapterType Adapter type. Never null.
@@ -48,6 +48,6 @@ public interface ImplementationPicker {
      * @param adaptable For reference: the adaptable. May be enquired to detect the context of the adaption. Never null.
      * @return If an implementation is chosen the class is returned, otherwise null.
      */
-    @Nullable Class<?> pick(@NotNull Class<?> adapterType, @NotNull Class<?>[] implementationsTypes, @NotNull Object adaptable);
-
+    @Nullable
+    Class<?> pick(@NotNull Class<?> adapterType, @NotNull Class<?>[] implementationsTypes, @NotNull Object adaptable);
 }

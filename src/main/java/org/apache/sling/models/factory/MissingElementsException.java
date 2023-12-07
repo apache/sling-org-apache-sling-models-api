@@ -28,7 +28,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * due to some missing elements (i.e. required fields/methods/constructor parameters
  * could not be injected).
  * Contains a number of {@link MissingElementException}s.
- * 
+ *
  * @see ModelFactory
  *
  */
@@ -38,22 +38,22 @@ public final class MissingElementsException extends RuntimeException {
 
     private Collection<MissingElementException> missingElements;
 
-    
     public MissingElementsException(String message) {
         super(message);
         missingElements = new ArrayList<MissingElementException>();
     }
 
     public void addMissingElementExceptions(MissingElementException e) {
-        // also add to suppressed list to make sure they appear as well with their full stack traces in the printStackTrace for this throwable
+        // also add to suppressed list to make sure they appear as well with their full stack traces in the
+        // printStackTrace for this throwable
         addSuppressed(e);
         missingElements.add(e);
     }
-    
+
     public boolean isEmpty() {
         return missingElements.isEmpty();
     }
-    
+
     public Collection<MissingElementException> getMissingElements() {
         return missingElements;
     }

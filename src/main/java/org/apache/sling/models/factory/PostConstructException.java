@@ -35,5 +35,4 @@ public class PostConstructException extends ModelClassException {
     public PostConstructException(String message, Throwable cause) {
         super(message, cause);
     }
-
 }
