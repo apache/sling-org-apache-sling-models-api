@@ -21,8 +21,6 @@ package org.apache.sling.models.annotations.apt;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
@@ -40,7 +38,6 @@ import org.apache.sling.models.annotations.Model;
     "javax.inject.Inject",
     "org.apache.sling.models.annotations.injectorspecific.*",
 })
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ValidatingAnnotationProcessor extends AbstractProcessor {
 
     @Override
