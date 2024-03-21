@@ -40,5 +40,4 @@ public class MissingElementException extends RuntimeException {
     public AnnotatedElement getElement() {
         return element;
     }
-
 }
