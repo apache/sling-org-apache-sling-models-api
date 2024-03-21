@@ -18,13 +18,13 @@
  */
 package org.apache.sling.models.factory;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MissingElementsExceptionTest {
 
@@ -34,10 +34,10 @@ public class MissingElementsExceptionTest {
         try {
             try {
                 throw new IllegalStateException("Root exception");
-            } catch(IllegalStateException rootException) {
+            } catch (IllegalStateException rootException) {
                 throw new MissingElementException(null, rootException);
             }
-        } catch(MissingElementException e) {
+        } catch (MissingElementException e) {
             wrapperException.addMissingElementExceptions(e);
         }
 
@@ -51,5 +51,4 @@ public class MissingElementsExceptionTest {
         assertThat(stringWriter.toString(), Matchers.containsString("Root exception"));
         assertThat(stringWriter.toString(), Matchers.containsString("Test wrapper"));
     }
-
 }

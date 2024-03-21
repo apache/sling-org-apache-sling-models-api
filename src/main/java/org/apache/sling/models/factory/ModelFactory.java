@@ -46,8 +46,9 @@ public interface ModelFactory {
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      */
-    public @NotNull <ModelType> ModelType createModel(@NotNull Object adaptable, @NotNull Class<ModelType> type) throws MissingElementsException,
-            InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
+    public @NotNull <ModelType> ModelType createModel(@NotNull Object adaptable, @NotNull Class<ModelType> type)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException;
 
     /**
      * Create a wrapped request object with the specified resource and instantiates the given Sling Model class from that wrapped request. The wrapped request
@@ -67,7 +68,8 @@ public interface ModelFactory {
      * @since 1.5.0 (Models API Bundle 1.4.4)
      * @see #getModelFromWrappedRequest(SlingHttpServletRequest, Resource, Class)
      */
-    public @NotNull <T> T createModelFromWrappedRequest(@NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
+    public @NotNull <T> T createModelFromWrappedRequest(
+            @NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 
     /**
      *
@@ -130,8 +132,9 @@ public interface ModelFactory {
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      */
-    public @NotNull Object getModelFromResource(@NotNull Resource resource) throws MissingElementsException,
-            InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
+    public @NotNull Object getModelFromResource(@NotNull Resource resource)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException;
 
     /**
      * Obtain an adapted model class based on the resource type of the request's resource.
@@ -145,8 +148,9 @@ public interface ModelFactory {
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      */
-    public @NotNull Object getModelFromRequest(@NotNull SlingHttpServletRequest request) throws MissingElementsException,
-            InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException;
+    public @NotNull Object getModelFromRequest(@NotNull SlingHttpServletRequest request)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException;
 
     /**
      * Export the model object using the defined target class using the named exporter.
@@ -160,8 +164,12 @@ public interface ModelFactory {
      * @throws ExportException if the export fails
      * @throws MissingExporterException if the named exporter can't be found
      */
-    public @NotNull <T> T exportModel(@NotNull Object model, @NotNull String exporterName,
-            @NotNull Class<T> targetClass, @NotNull Map<String, String> options) throws ExportException, MissingExporterException;
+    public @NotNull <T> T exportModel(
+            @NotNull Object model,
+            @NotNull String exporterName,
+            @NotNull Class<T> targetClass,
+            @NotNull Map<String, String> options)
+            throws ExportException, MissingExporterException;
 
     /**
      * Export the model object registered to the resource's type using the defined target class using the named exporter.
@@ -181,10 +189,13 @@ public interface ModelFactory {
      * @throws ExportException if the export fails
      * @throws MissingExporterException if the named exporter can't be found
      */
-    public @NotNull <T> T exportModelForResource(@NotNull Resource resource, @NotNull String exporterName,
-            @NotNull Class<T> targetClass, @NotNull Map<String, String> options) throws MissingElementsException,
-            InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException,
-            ExportException, MissingExporterException;
+    public @NotNull <T> T exportModelForResource(
+            @NotNull Resource resource,
+            @NotNull String exporterName,
+            @NotNull Class<T> targetClass,
+            @NotNull Map<String, String> options)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException, ExportException, MissingExporterException;
 
     /**
      * Export the model object registered to the request's resource's type using the defined target class using the named exporter.
@@ -204,11 +215,13 @@ public interface ModelFactory {
      * @throws ExportException if the export fails
      * @throws MissingExporterException if the named exporter can't be found
      */
-    public @NotNull <T> T exportModelForRequest(@NotNull SlingHttpServletRequest request, @NotNull String exporterName,
-            @NotNull Class<T> targetClass, @NotNull Map<String, String> options) throws MissingElementsException,
-            InvalidAdaptableException, ModelClassException, PostConstructException, ValidationException, InvalidModelException,
-            ExportException, MissingExporterException;
-
+    public @NotNull <T> T exportModelForRequest(
+            @NotNull SlingHttpServletRequest request,
+            @NotNull String exporterName,
+            @NotNull Class<T> targetClass,
+            @NotNull Map<String, String> options)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException, ExportException, MissingExporterException;
 
     /**
      * Create a wrapped request object with the specified resource and (try to) adapt the request object into the specified class. The wrapped request
@@ -222,6 +235,6 @@ public interface ModelFactory {
      * @return an instance of the target class or null if the adaptation could not be done
      * @since 1.4.0 (Models API Bundle 1.3.6)
      */
-    public @Nullable <T> T getModelFromWrappedRequest(@NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
-
+    public @Nullable <T> T getModelFromWrappedRequest(
+            @NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 }

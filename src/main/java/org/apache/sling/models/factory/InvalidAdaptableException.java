@@ -23,7 +23,7 @@ import org.osgi.annotation.versioning.ProviderType;
 /**
  * Exception which is triggered whenever a Sling Model could not be
  * instantiated because it could not be adapted from the given adaptable.
- * 
+ *
  * @see ModelFactory
  *
  */
