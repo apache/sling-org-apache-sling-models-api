@@ -22,9 +22,9 @@ import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Exception which is triggered when the Model class could not be instantiated due to
- * not having a model annotation, some reflection error, invalid constructors or 
+ * not having a model annotation, some reflection error, invalid constructors or
  * because some exception within the post construct method was triggered.
- * 
+ *
  * @see ModelFactory
  */
 @ProviderType
@@ -35,7 +35,7 @@ public class ModelClassException extends RuntimeException {
     public ModelClassException(String message) {
         super(message);
     }
-    
+
     public ModelClassException(String message, Throwable e) {
         super(message, e);
     }
