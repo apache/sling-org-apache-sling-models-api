@@ -26,5 +26,4 @@ import org.osgi.annotation.versioning.ConsumerType;
  *
  */
 @ConsumerType
-public interface AcceptsNullName {
-}
+public interface AcceptsNullName {}
