@@ -21,6 +21,7 @@ package org.apache.sling.models.factory;
 import java.util.Map;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingJakartaHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -67,9 +68,32 @@ public interface ModelFactory {
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      * @since 1.5.0 (Models API Bundle 1.4.4)
      * @see #getModelFromWrappedRequest(SlingHttpServletRequest, Resource, Class)
+     * @deprecated use {@link #createModelFromWrappedRequest(SlingJakartaHttpServletRequest, Resource, Class)} instead
      */
+    @Deprecated(since = "1.6.0")
     public @NotNull <T> T createModelFromWrappedRequest(
             @NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
+
+    /**
+     * Create a wrapped request object with the specified resource and instantiates the given Sling Model class from that wrapped request. The wrapped request
+     * object will have a fresh set of script bindings so that any injected bindings references have the correct context.
+     *
+     * @param request the current request
+     * @param resource the resource to set as the wrapped request's resource
+     * @param targetClass the class to instantiate
+     * @param <T> Model type
+     * @return a new instance for the required model (never {@code null})
+     * @throws MissingElementsException in case no injector was able to inject some required values with the given types
+     * @throws InvalidAdaptableException in case the given class cannot be instantiated from the given adaptable (different adaptable on the model annotation)
+     * @throws ModelClassException in case the model could not be instantiated because model annotation was missing, reflection failed, no valid constructor was found, model was not registered as adapter factory yet, or post-construct could not be called
+     * @throws PostConstructException in case the post-construct method has thrown an exception itself
+     * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
+     * @throws InvalidModelException in case the given model type could not be validated through the model validation
+     * @since 1.5.0 (Models API Bundle 1.4.4)
+     * @see #getModelFromWrappedRequest(SlingJakartaHttpServletRequest, Resource, Class)
+     */
+    public @NotNull <T> T createModelFromWrappedRequest(
+            @NotNull SlingJakartaHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 
     /**
      *
@@ -117,8 +141,18 @@ public interface ModelFactory {
      *
      * @param request a request
      * @return {@code true} if a model class is mapped to the resource type
+     * @deprecated use {@link #isModelAvailableForRequest(SlingJakartaHttpServletRequest)} instead
      */
+    @Deprecated(since = "1.6.0")
     public boolean isModelAvailableForRequest(@NotNull SlingHttpServletRequest request);
+
+    /**
+     * Determine is a model class is available for the request's resource's resource type.
+     *
+     * @param request a request
+     * @return {@code true} if a model class is mapped to the resource type
+     */
+    public boolean isModelAvailableForRequest(@NotNull SlingJakartaHttpServletRequest request);
 
     /**
      * Obtain an adapted model class based on the resource type of the provided resource.
@@ -147,8 +181,26 @@ public interface ModelFactory {
      * @throws PostConstructException in case the post-construct method has thrown an exception itself
      * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
+     * @deprecated use {@link #getModelFromRequest(SlingJakartaHttpServletRequest)} instead
      */
+    @Deprecated(since = "1.6.0")
     public @NotNull Object getModelFromRequest(@NotNull SlingHttpServletRequest request)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException;
+
+    /**
+     * Obtain an adapted model class based on the resource type of the request's resource.
+     *
+     * @param request a request
+     * @return an adapted model object
+     * @throws MissingElementsException in case no injector was able to inject some required values with the given types
+     * @throws InvalidAdaptableException in case the given class cannot be instantiated from the given adaptable (different adaptable on the model annotation)
+     * @throws ModelClassException in case the model could not be instantiated because model annotation was missing, reflection failed, no valid constructor was found, model was not registered as adapter factory yet, or post-construct could not be called
+     * @throws PostConstructException in case the post-construct method has thrown an exception itself
+     * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
+     * @throws InvalidModelException in case the given model type could not be validated through the model validation
+     */
+    public @NotNull Object getModelFromRequest(@NotNull SlingJakartaHttpServletRequest request)
             throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
                     ValidationException, InvalidModelException;
 
@@ -214,9 +266,37 @@ public interface ModelFactory {
      * @throws InvalidModelException in case the given model type could not be validated through the model validation
      * @throws ExportException if the export fails
      * @throws MissingExporterException if the named exporter can't be found
+     * @deprecated use {@link #exportModelForRequest(SlingJakartaHttpServletRequest, String, Class, Map)} instead
      */
+    @Deprecated(since = "1.6.0")
     public @NotNull <T> T exportModelForRequest(
             @NotNull SlingHttpServletRequest request,
+            @NotNull String exporterName,
+            @NotNull Class<T> targetClass,
+            @NotNull Map<String, String> options)
+            throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
+                    ValidationException, InvalidModelException, ExportException, MissingExporterException;
+
+    /**
+     * Export the model object registered to the request's resource's type using the defined target class using the named exporter.
+     *
+     * @param request the request
+     * @param exporterName the exporter name
+     * @param targetClass the target class
+     * @param options any exporter options
+     * @param <T> the target class
+     * @return an instance of the target class
+     * @throws MissingElementsException in case no injector was able to inject some required values with the given types
+     * @throws InvalidAdaptableException in case the given class cannot be instantiated from the given adaptable (different adaptable on the model annotation)
+     * @throws ModelClassException in case the model could not be instantiated because model annotation was missing, reflection failed, no valid constructor was found, model was not registered as adapter factory yet, or post-construct could not be called
+     * @throws PostConstructException in case the post-construct method has thrown an exception itself
+     * @throws ValidationException in case validation could not be performed for some reason (e.g. no validation information available)
+     * @throws InvalidModelException in case the given model type could not be validated through the model validation
+     * @throws ExportException if the export fails
+     * @throws MissingExporterException if the named exporter can't be found
+     */
+    public @NotNull <T> T exportModelForRequest(
+            @NotNull SlingJakartaHttpServletRequest request,
             @NotNull String exporterName,
             @NotNull Class<T> targetClass,
             @NotNull Map<String, String> options)
@@ -234,7 +314,25 @@ public interface ModelFactory {
      * @param <T> the target adapter class
      * @return an instance of the target class or null if the adaptation could not be done
      * @since 1.4.0 (Models API Bundle 1.3.6)
+     * @deprecated use {@link #getModelFromWrappedRequest(SlingJakartaHttpServletRequest, Resource, Class)} instead
      */
+    @Deprecated(since = "1.6.0")
     public @Nullable <T> T getModelFromWrappedRequest(
             @NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
+
+    /**
+     * Create a wrapped request object with the specified resource and (try to) adapt the request object into the specified class. The wrapped request
+     * object will have a fresh set of script bindings so that any injected bindings references have the correct context.
+     * Consider using {@link #createModelFromWrappedRequest(SlingHttpServletRequest, Resource, Class)} instead to get exceptions propagated which may occur when trying to create the model.
+     *
+     * @param request the current request
+     * @param resource the resource to set as the wrapped request's resource
+     * @param targetClass the target adapter class
+     * @param <T> the target adapter class
+     * @return an instance of the target class or null if the adaptation could not be done
+     * @since 1.4.0 (Models API Bundle 1.3.6)
+     *
+     */
+    public @Nullable <T> T getModelFromWrappedRequest(
+            @NotNull SlingJakartaHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
 }
