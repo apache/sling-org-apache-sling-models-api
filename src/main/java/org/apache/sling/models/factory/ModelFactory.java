@@ -112,7 +112,7 @@ public interface ModelFactory {
      * @see org.apache.sling.models.annotations.Model
      * @deprecated Use {@link #isModelClass(Class)} instead!
      */
-    @Deprecated
+    @Deprecated(since = "1.1.0")
     public boolean isModelClass(@NotNull Object adaptable, @NotNull Class<?> type);
 
     /**
