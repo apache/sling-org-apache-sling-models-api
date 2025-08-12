@@ -20,7 +20,6 @@ package org.apache.sling.models.factory;
 
 import java.util.Map;
 
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingJakartaHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.jetbrains.annotations.NotNull;
@@ -72,7 +71,9 @@ public interface ModelFactory {
      */
     @Deprecated(since = "1.6.0")
     public @NotNull <T> T createModelFromWrappedRequest(
-            @NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
+            @NotNull org.apache.sling.api.SlingHttpServletRequest request,
+            @NotNull Resource resource,
+            @NotNull Class<T> targetClass);
 
     /**
      * Create a wrapped request object with the specified resource and instantiates the given Sling Model class from that wrapped request. The wrapped request
@@ -144,7 +145,7 @@ public interface ModelFactory {
      * @deprecated use {@link #isModelAvailableForRequest(SlingJakartaHttpServletRequest)} instead
      */
     @Deprecated(since = "1.6.0")
-    public boolean isModelAvailableForRequest(@NotNull SlingHttpServletRequest request);
+    public boolean isModelAvailableForRequest(@NotNull org.apache.sling.api.SlingHttpServletRequest request);
 
     /**
      * Determine is a model class is available for the request's resource's resource type.
@@ -184,7 +185,7 @@ public interface ModelFactory {
      * @deprecated use {@link #getModelFromRequest(SlingJakartaHttpServletRequest)} instead
      */
     @Deprecated(since = "1.6.0")
-    public @NotNull Object getModelFromRequest(@NotNull SlingHttpServletRequest request)
+    public @NotNull Object getModelFromRequest(@NotNull org.apache.sling.api.SlingHttpServletRequest request)
             throws MissingElementsException, InvalidAdaptableException, ModelClassException, PostConstructException,
                     ValidationException, InvalidModelException;
 
@@ -270,7 +271,7 @@ public interface ModelFactory {
      */
     @Deprecated(since = "1.6.0")
     public @NotNull <T> T exportModelForRequest(
-            @NotNull SlingHttpServletRequest request,
+            @NotNull org.apache.sling.api.SlingHttpServletRequest request,
             @NotNull String exporterName,
             @NotNull Class<T> targetClass,
             @NotNull Map<String, String> options)
@@ -318,7 +319,9 @@ public interface ModelFactory {
      */
     @Deprecated(since = "1.6.0")
     public @Nullable <T> T getModelFromWrappedRequest(
-            @NotNull SlingHttpServletRequest request, @NotNull Resource resource, @NotNull Class<T> targetClass);
+            @NotNull org.apache.sling.api.SlingHttpServletRequest request,
+            @NotNull Resource resource,
+            @NotNull Class<T> targetClass);
 
     /**
      * Create a wrapped request object with the specified resource and (try to) adapt the request object into the specified class. The wrapped request
