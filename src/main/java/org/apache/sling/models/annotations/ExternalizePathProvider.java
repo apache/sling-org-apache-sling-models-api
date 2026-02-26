@@ -14,7 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Version("1.2.0")
-package org.apache.sling.models.annotations.injectorspecific;
+package org.apache.sling.models.annotations;
 
-import org.osgi.annotation.versioning.Version;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * Interface for a Provider of an Externalized Path. The
+ * Externalize Path Injector is selecting the Provider with
+ * the highest Service Ranking so adjust the ranking as needed.
+ */
+public interface ExternalizePathProvider {
+
+    /**
+     * Externalizes a given Path
+     * @param sourcePath The path to be externalized. If this value is null then null is returned
+     * @param annotation Externalize Path Annotation of that property
+     * @param adaptable The adaptable source
+     * @return The externalized path if there is a mapping or otherwise the same
+     */
+    String externalize(@NotNull Object adaptable, ExternalizePath annotation, String sourcePath);
+}
